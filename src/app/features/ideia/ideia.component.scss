@@ -1,0 +1,37 @@
+:host {
+  display: block;
+}
+
+.container {
+  max-width: 28rem;
+  margin: 0 auto;
+  padding: 1.75rem;
+  border: 1px solid var(--borda);
+  border-radius: var(--raio);
+  background-color: var(--superficie);
+}
+
+.container h2 {
+  margin-bottom: 1.5rem;
+  font-size: 1.05rem;
+}
+
+form {
+  display: grid;
+  gap: 1.1rem;
+}
+
+.container button {
+  width: 100%;
+}
+
+.excluir {
+  background-color: transparent;
+  border-color: var(--borda-forte);
+  color: var(--perigo);
+}
+
+.excluir:hover:not(:disabled) {
+  background-color: transparent;
+  border-color: var(--perigo);
+}

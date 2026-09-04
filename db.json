@@ -1,0 +1,43 @@
+{
+  "ideias": [
+    {
+      "titulo": "Ideia Boa",
+      "descricao": "tudo que ta ruim",
+      "status": "em_andamento",
+      "id": "NK86sdKheqc"
+    },
+    {
+      "titulo": "Ideia Ruim",
+      "descricao": "tudo de bom, e muito mais",
+      "status": "concluido",
+      "id": "KTsPsGYmKpo"
+    },
+    {
+      "titulo": "Ideia Media",
+      "descricao": "qualquer coisa",
+      "status": "pendente",
+      "id": "raudriMgLKI"
+    },
+    {
+      "titulo": "Outra Ideia",
+      "descricao": "a ideia anterior",
+      "id": "s4jNVuQmMj4"
+    },
+    {
+      "titulo": "Ideia Estranha",
+      "descricao": "uma coisa estranha",
+      "id": "kUlf1gLn2ZQ"
+    },
+    {
+      "titulo": "Ideia Interessante",
+      "descricao": "uma coisa interessante",
+      "id": "q5BLCdqxswo"
+    },
+    {
+      "titulo": "Ideia Maluca",
+      "descricao": "uma coisa maluca",
+      "id": "T-GNGvVOp2w"
+    }
+  ],
+  "$schema": "./node_modules/json-server/schema.json"
+}

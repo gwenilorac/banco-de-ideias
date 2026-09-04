@@ -1,0 +1,27 @@
+<form #cadastroForm='ngForm' (ngSubmit)='enviar(cadastroForm)'>
+
+  <h2>{{nomeDoForm}}</h2>
+
+  <label>Ideia: </label>
+  <input name='titulo' ngModel required #titulo='ngModel'>
+  @if (titulo.invalid && titulo.touched) {
+  <span class='erro'>O titulo é obrigatório</span>
+  }
+
+  <label>O que resolve? </label>
+  <input name='descricao' ngModel required #descricao='ngModel'>
+  @if (descricao.invalid && descricao.touched) {
+  <span class='erro'>A solução é obrigatória</span>
+  }
+
+  <button [disabled]='cadastroForm.invalid'> Enviar </button>
+
+</form>
+
+<div class="cards">
+  @for (ideia of listaDeIdeias(); track ideia.id) {
+  <app-card [ideia]="ideia" />
+  } @empty {
+  <h1>A lista esta vazia!</h1>
+  }
+</div>
