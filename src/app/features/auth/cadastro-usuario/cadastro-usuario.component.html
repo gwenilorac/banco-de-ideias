@@ -1,0 +1,83 @@
+@let dados = estado();
+
+<main class="tela">
+  <section class="cartao painel">
+    <header class="cabecalho">
+      <h1>Criar <span class="texto-gradiente">conta</span></h1>
+      <p class="texto-suave">Suas ideias ficam vinculadas ao seu nome.</p>
+    </header>
+
+    @if (erro(); as mensagem) {
+      <p class="alerta alerta--erro" role="alert">{{ mensagem }}</p>
+    }
+
+    <form [formGroup]="formulario" (ngSubmit)="cadastrar()" novalidate>
+      <div class="campo" [class.campo--invalido]="dados.erroNome">
+        <label class="campo__rotulo" for="nome">Nome</label>
+        <input
+          id="nome"
+          type="text"
+          class="campo__controle"
+          formControlName="nome"
+          autocomplete="name"
+          [attr.aria-invalid]="dados.erroNome ? 'true' : null"
+        />
+        @if (dados.erroNome) {
+          <span class="campo__erro" role="alert">{{ dados.erroNome }}</span>
+        }
+      </div>
+
+      <div class="campo" [class.campo--invalido]="dados.erroEmail">
+        <label class="campo__rotulo" for="email">E-mail</label>
+        <input
+          id="email"
+          type="email"
+          class="campo__controle"
+          formControlName="email"
+          autocomplete="email"
+          placeholder="voce@exemplo.com"
+          [attr.aria-invalid]="dados.erroEmail ? 'true' : null"
+        />
+        @if (dados.erroEmail) {
+          <span class="campo__erro" role="alert">{{ dados.erroEmail }}</span>
+        }
+      </div>
+
+      <div class="campo" [class.campo--invalido]="dados.erroSenha">
+        <label class="campo__rotulo" for="senha">Senha</label>
+        <input
+          id="senha"
+          type="password"
+          class="campo__controle"
+          formControlName="senha"
+          autocomplete="new-password"
+          [attr.aria-invalid]="dados.erroSenha ? 'true' : null"
+        />
+        @if (dados.erroSenha) {
+          <span class="campo__erro" role="alert">{{ dados.erroSenha }}</span>
+        }
+      </div>
+
+      <div class="campo" [class.campo--invalido]="dados.erroConfirmacao">
+        <label class="campo__rotulo" for="confirmacao">Confirmar senha</label>
+        <input
+          id="confirmacao"
+          type="password"
+          class="campo__controle"
+          formControlName="confirmacao"
+          autocomplete="new-password"
+          [attr.aria-invalid]="dados.erroConfirmacao ? 'true' : null"
+        />
+        @if (dados.erroConfirmacao) {
+          <span class="campo__erro" role="alert">{{ dados.erroConfirmacao }}</span>
+        }
+      </div>
+
+      <button type="submit" class="btn btn--primario btn--largo" [disabled]="dados.invalido || enviando()">
+        {{ enviando() ? 'Criando conta…' : 'Criar conta' }}
+      </button>
+    </form>
+
+    <p class="rodape texto-suave">Já tem conta? <a routerLink="/login">Entrar</a></p>
+  </section>
+</main>

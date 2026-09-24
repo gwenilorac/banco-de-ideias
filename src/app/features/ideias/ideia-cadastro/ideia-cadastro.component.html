@@ -1,0 +1,66 @@
+@let dados = estado();
+
+<main class="tela">
+  <a class="voltar texto-suave" routerLink="/ideias">&larr; Voltar</a>
+
+  <section class="painel cartao">
+    <h1>Nova ideia</h1>
+
+    @if (erro(); as mensagem) {
+      <p class="alerta alerta--erro" role="alert">{{ mensagem }}</p>
+    }
+
+    <form [formGroup]="formulario" (ngSubmit)="enviar()" novalidate>
+      <div class="campo" [class.campo--invalido]="dados.erroIdeia">
+        <label class="campo__rotulo" for="ideia">Ideia</label>
+        <input
+          id="ideia"
+          type="text"
+          class="campo__controle"
+          formControlName="ideia"
+          placeholder="Ex.: Onboarding guiado em 3 passos"
+          autocomplete="off"
+          [attr.aria-invalid]="dados.erroIdeia ? 'true' : null"
+        />
+        @if (dados.erroIdeia) {
+          <span class="campo__erro" role="alert">{{ dados.erroIdeia }}</span>
+        }
+      </div>
+
+      <div class="campo" [class.campo--invalido]="dados.erroResolve">
+        <label class="campo__rotulo" for="resolve">O que resolve?</label>
+        <textarea
+          id="resolve"
+          class="campo__controle"
+          formControlName="resolve"
+          placeholder="Qual problema essa ideia elimina?"
+          [attr.aria-invalid]="dados.erroResolve ? 'true' : null"
+        ></textarea>
+        @if (dados.erroResolve) {
+          <span class="campo__erro" role="alert">{{ dados.erroResolve }}</span>
+        }
+      </div>
+
+      <div class="campo">
+        <label class="campo__rotulo" for="categoria">
+          Categoria <span class="texto-suave">(opcional)</span>
+        </label>
+        <input
+          id="categoria"
+          type="text"
+          class="campo__controle"
+          formControlName="categoria"
+          placeholder="produto, processo, marketing…"
+          autocomplete="off"
+        />
+      </div>
+
+      <div class="acoes">
+        <a class="btn btn--fantasma" routerLink="/ideias">Cancelar</a>
+        <button type="submit" class="btn btn--primario" [disabled]="dados.invalido || salvando()">
+          {{ salvando() ? 'Cadastrando…' : 'Cadastrar ideia' }}
+        </button>
+      </div>
+    </form>
+  </section>
+</main>

@@ -1,0 +1,20 @@
+@if (carregando()) {
+  <p class="estado-vazio">Carregando ideias…</p>
+} @else {
+  <div class="grade">
+    @for (item of ideias(); track item.id) {
+      <app-card
+        [ideia]="item"
+        [propria]="idsProprios().has(item.id)"
+        [votado]="idsVotados().has(item.id)"
+        (votoSolicitado)="votoSolicitado.emit($event)"
+        (remocaoSolicitada)="remocaoSolicitada.emit($event)"
+      />
+    } @empty {
+      <div class="estado-vazio painel">
+        <h2>Nenhuma ideia encontrada</h2>
+        <p>Ajuste os filtros ou cadastre uma nova ideia.</p>
+      </div>
+    }
+  </div>
+}

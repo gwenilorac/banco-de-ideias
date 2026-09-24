@@ -1,0 +1,55 @@
+@let dados = estado();
+
+<main class="tela">
+  <section class="cartao painel">
+    <header class="cabecalho">
+      <h1>Banco de <span class="texto-gradiente">Ideias</span></h1>
+      <p class="texto-suave">Entre para ver e cadastrar suas ideias.</p>
+    </header>
+
+    @if (erro(); as mensagem) {
+      <p class="alerta alerta--erro" role="alert">{{ mensagem }}</p>
+    }
+
+    <form [formGroup]="formulario" (ngSubmit)="entrar()" novalidate>
+      <div class="campo" [class.campo--invalido]="dados.erroEmail">
+        <label class="campo__rotulo" for="email">E-mail</label>
+        <input
+          id="email"
+          type="email"
+          class="campo__controle"
+          formControlName="email"
+          autocomplete="email"
+          placeholder="voce@exemplo.com"
+          [attr.aria-invalid]="dados.erroEmail ? 'true' : null"
+        />
+        @if (dados.erroEmail) {
+          <span class="campo__erro" role="alert">{{ dados.erroEmail }}</span>
+        }
+      </div>
+
+      <div class="campo" [class.campo--invalido]="dados.erroSenha">
+        <label class="campo__rotulo" for="senha">Senha</label>
+        <input
+          id="senha"
+          type="password"
+          class="campo__controle"
+          formControlName="senha"
+          autocomplete="current-password"
+          [attr.aria-invalid]="dados.erroSenha ? 'true' : null"
+        />
+        @if (dados.erroSenha) {
+          <span class="campo__erro" role="alert">{{ dados.erroSenha }}</span>
+        }
+      </div>
+
+      <button type="submit" class="btn btn--primario btn--largo" [disabled]="dados.invalido || enviando()">
+        {{ enviando() ? 'Entrando…' : 'Entrar' }}
+      </button>
+    </form>
+
+    <p class="rodape texto-suave">
+      Ainda não tem conta? <a routerLink="/cadastro">Cadastre-se</a>
+    </p>
+  </section>
+</main>

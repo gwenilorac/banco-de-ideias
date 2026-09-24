@@ -1,0 +1,62 @@
+.barra {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.85rem 1.5rem;
+  border-bottom: 1px solid var(--borda);
+  background-color: var(--superficie);
+}
+
+.marca {
+  font-weight: 700;
+  letter-spacing: -0.02em;
+}
+
+.usuario {
+  margin-left: auto;
+  font-size: 0.88rem;
+}
+
+.barra a.btn:hover {
+  text-decoration: none;
+}
+
+.conteudo {
+  display: grid;
+  gap: 1rem;
+  max-width: 70rem;
+  margin: 0 auto;
+  padding: 1.75rem 1.5rem 3rem;
+}
+
+.resumo {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem 1.25rem;
+  padding: 0;
+  list-style: none;
+  color: var(--texto-suave);
+  font-size: 0.86rem;
+}
+
+.resumo strong {
+  color: var(--texto);
+}
+
+.resumo__destaque {
+  overflow: hidden;
+  max-width: 100%;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+@media (max-width: 820px) {
+  .barra {
+    flex-wrap: wrap;
+    padding: 0.75rem 1rem;
+  }
+
+  .conteudo {
+    padding: 1.25rem 1rem 2.5rem;
+  }
+}

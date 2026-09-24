@@ -1,18 +1,27 @@
-import { Component, inject, input } from '@angular/core';
-import { IdeiaInterface } from '@shared/ideia.interface';
-import { Router } from "@angular/router";
+import { ChangeDetectionStrategy, Component, computed, input, output } from '@angular/core';
+import { RouterLink } from '@angular/router';
+
+import { Ideia } from '@shared/ideia.interface';
 
 @Component({
   selector: 'app-card',
-  styleUrl: './card.component.scss',
+  imports: [RouterLink],
   templateUrl: './card.component.html',
+  styleUrl: './card.component.scss',
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class CardComponent {
-  ideia = input.required<IdeiaInterface>();
-  router = inject(Router)
+  readonly ideia = input.required<Ideia>();
+  readonly propria = input(false);
+  readonly votado = input(false);
 
-  irParaEdicao(){
-    this.router.navigate(['/ideia', this.ideia().id])
-  }
-  
+  readonly votoSolicitado = output<Ideia>();
+  readonly remocaoSolicitada = output<Ideia>();
+
+  protected readonly rotuloDoVoto = computed(() => {
+    if (this.propria()) {
+      return 'Você não pode votar na sua própria ideia';
+    }
+    return this.votado() ? 'Remover meu voto' : 'Votar nesta ideia';
+  });
 }

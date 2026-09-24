@@ -1,0 +1,32 @@
+.tela {
+  max-width: 36rem;
+  margin: 0 auto;
+  padding: 2rem 1.5rem 3rem;
+}
+
+.voltar {
+  display: inline-block;
+  margin-bottom: 1rem;
+  font-size: 0.88rem;
+}
+
+.cartao {
+  display: grid;
+  gap: 1rem;
+  padding: 1.6rem;
+}
+
+.cartao h1 {
+  font-size: 1.35rem;
+}
+
+form {
+  display: grid;
+  gap: 1rem;
+}
+
+.acoes {
+  display: flex;
+  justify-content: flex-end;
+  gap: 0.6rem;
+}

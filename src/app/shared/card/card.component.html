@@ -1,10 +1,37 @@
-<div class="card">
-    <div class="card-content">
-        <h3 class="card-title">{{ideia().titulo}}</h3>
-        <p class="card-description">{{ideia().descricao}}</p>
-        <p class="card-status">{{ideia().status}}</p>
-        <div class="card-footer">
-            <button class="card-button" (click)="irParaEdicao()">Saiba mais</button>
-        </div>
-    </div>
-</div>
+@let atual = ideia();
+
+<article class="cartao painel" [class.cartao--propria]="propria()">
+  <header class="cartao__topo">
+    @if (atual.categoria) {
+      <span class="selo">{{ atual.categoria }}</span>
+    }
+    <button
+      type="button"
+      class="votos"
+      [class.votos--ativo]="votado()"
+      [disabled]="propria()"
+      [attr.aria-pressed]="propria() ? null : votado()"
+      (click)="votoSolicitado.emit(atual)"
+      [attr.aria-label]="rotuloDoVoto()"
+      [title]="rotuloDoVoto()"
+    >
+      ▲ {{ atual.votos }}
+    </button>
+  </header>
+
+  <h3 class="cartao__titulo">{{ atual.ideia }}</h3>
+  <p class="cartao__resolve">{{ atual.resolve }}</p>
+
+  <footer class="cartao__base">
+    <span class="cartao__autor texto-suave">
+      {{ propria() ? 'Sua ideia' : 'por ' + (atual.autor || 'anônimo') }}
+    </span>
+
+    @if (propria()) {
+      <a class="btn btn--contorno btn--pequeno" [routerLink]="['/ideias', atual.id, 'editar']">Editar</a>
+      <button type="button" class="btn btn--perigo btn--pequeno" (click)="remocaoSolicitada.emit(atual)">
+        Excluir
+      </button>
+    }
+  </footer>
+</article>

@@ -1,0 +1,17 @@
+.filtros {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr)) auto;
+  gap: 0.9rem;
+  align-items: end;
+  padding: 1.25rem;
+}
+
+.filtros__busca {
+  grid-column: 1 / -1;
+}
+
+@media (max-width: 720px) {
+  .filtros {
+    grid-template-columns: 1fr;
+  }
+}

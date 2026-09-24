@@ -1,63 +1,96 @@
 :host {
   display: block;
-  height: 100%;
 }
 
-.card {
-  height: 100%;
-  padding: 1.1rem 1.15rem;
-  border: 1px solid var(--borda);
-  border-radius: var(--raio);
-  background-color: var(--superficie);
-  transition: border-color 0.15s ease;
-}
-
-.card:hover {
-  border-color: var(--borda-forte);
-}
-
-.card-content {
+.cartao {
   display: flex;
   flex-direction: column;
-  gap: 0.4rem;
+  gap: 0.6rem;
   height: 100%;
+  padding: 1.15rem 1.25rem;
+  transition:
+    transform var(--transicao),
+    box-shadow var(--transicao);
 }
 
-.card-title {
-  font-size: 0.95rem;
+.cartao:hover {
+  transform: translateY(-3px);
+  box-shadow: var(--sombra-lg);
 }
 
-.card-description {
-  margin: 0;
-  color: var(--texto-suave);
-  font-size: 0.84rem;
+.cartao__topo {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
 }
 
-.card-status {
-  align-self: flex-start;
-  margin: 0.15rem 0 0;
-  padding: 0.1rem 0.5rem;
-  border-radius: 999px;
-  background-color: var(--fundo);
-  color: var(--texto-suave);
-  font-size: 0.72rem;
-}
-
-.card-footer {
-  margin-top: auto;
-  padding-top: 0.9rem;
-}
-
-.card-button {
-  padding: 0.35rem 0.8rem;
-  border-color: var(--borda-forte);
+.votos {
+  margin-left: auto;
+  padding: 0.15rem 0.6rem;
+  border: 1px solid var(--borda);
+  border-radius: var(--raio-pill);
   background-color: transparent;
   color: var(--texto-suave);
-  font-size: 0.8rem;
+  font-size: 0.78rem;
+  font-weight: 650;
+  font-variant-numeric: tabular-nums;
+  cursor: pointer;
+  transition:
+    border-color var(--transicao),
+    color var(--transicao);
 }
 
-.card-button:hover:not(:disabled) {
+.votos:hover:not(:disabled) {
   border-color: var(--acento);
-  background-color: transparent;
   color: var(--acento);
+}
+
+.votos--ativo {
+  border-color: var(--acento);
+  background-color: var(--acento);
+  color: #ffffff;
+}
+
+.votos--ativo:hover:not(:disabled) {
+  background-color: var(--acento-forte);
+  color: #ffffff;
+}
+
+.votos:disabled {
+  cursor: not-allowed;
+  opacity: 0.6;
+}
+
+.cartao--propria {
+  border-color: var(--acento-suave);
+}
+
+.cartao__titulo {
+  font-size: 1.05rem;
+}
+
+.cartao__resolve {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 3;
+  overflow: hidden;
+  color: var(--texto-suave);
+  font-size: 0.88rem;
+}
+
+.cartao__base {
+  display: flex;
+  gap: 0.4rem;
+  margin-top: auto;
+  padding-top: 0.8rem;
+  border-top: 1px solid var(--borda);
+}
+
+.cartao__base {
+  align-items: center;
+}
+
+.cartao__autor {
+  margin-right: auto;
+  font-size: 0.8rem;
 }

@@ -1,0 +1,45 @@
+<form class="filtros painel" [formGroup]="formulario" role="search">
+  <div class="campo filtros__busca">
+    <label class="campo__rotulo" for="busca">Buscar ideias</label>
+    <input
+      id="busca"
+      type="search"
+      class="campo__controle"
+      formControlName="texto"
+      placeholder="Busque pelo título ou pelo problema que resolve…"
+      autocomplete="off"
+    />
+  </div>
+
+  <div class="campo">
+    <label class="campo__rotulo" for="filtro-categoria">Categoria</label>
+    <select id="filtro-categoria" class="campo__controle" formControlName="categoria">
+      <option value="">Todas</option>
+      @for (categoria of categorias(); track categoria) {
+        <option [value]="categoria">{{ categoria }}</option>
+      } @empty {
+        <option value="" disabled>Nenhuma categoria</option>
+      }
+    </select>
+  </div>
+
+  <div class="campo">
+    <label class="campo__rotulo" for="filtro-autoria">Autoria</label>
+    <select id="filtro-autoria" class="campo__controle" formControlName="autoria">
+      <option value="todas">Todas as ideias</option>
+      <option value="minhas">Somente as minhas</option>
+      <option value="outras">De outras pessoas</option>
+    </select>
+  </div>
+
+  <div class="campo">
+    <label class="campo__rotulo" for="filtro-ordem">Ordenar por</label>
+    <select id="filtro-ordem" class="campo__controle" formControlName="ordem">
+      <option value="recentes">Mais recentes</option>
+      <option value="antigas">Mais antigas</option>
+      <option value="votadas">Mais votadas</option>
+    </select>
+  </div>
+
+  <button type="button" class="btn btn--fantasma filtros__limpar" (click)="limpar()">Limpar filtros</button>
+</form>

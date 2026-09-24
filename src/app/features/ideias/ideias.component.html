@@ -1,0 +1,45 @@
+@let dados = resumo();
+
+<header class="barra">
+  <span class="marca">Banco de <span class="texto-gradiente">Ideias</span></span>
+
+  @if (usuario(); as logado) {
+    <span class="usuario texto-suave">{{ logado.nome }}</span>
+  }
+  <a class="btn btn--primario btn--pequeno" routerLink="/ideias/nova">+ Nova ideia</a>
+  <button type="button" class="btn btn--fantasma btn--pequeno" (click)="sair()">Sair</button>
+</header>
+
+<main class="conteudo">
+  <app-ideia-filtros [categorias]="categorias()" (filtrosAlterados)="filtrar($event)" />
+
+  @if (erro(); as mensagem) {
+    <p class="alerta alerta--erro" role="alert">{{ mensagem }}</p>
+  }
+
+  @if (!carregando()) {
+    <ul class="resumo" aria-label="Resumo da busca">
+      <li><strong>{{ dados.total }}</strong> {{ dados.total === 1 ? 'ideia' : 'ideias' }}</li>
+      <li><strong>{{ dados.totalDeVotos }}</strong> votos · média {{ dados.mediaDeVotos }}</li>
+      <li>
+        <strong>{{ dados.minhas }}</strong> suas ({{ dados.percentualMinhas }}%) ·
+        {{ dados.votosRecebidos }} votos recebidos
+      </li>
+      @if (dados.categoriaEmAlta; as categoria) {
+        <li>Em alta: <span class="selo">{{ categoria }}</span></li>
+      }
+      @if (dados.maisVotada; as destaque) {
+        <li class="resumo__destaque">Mais votada: <strong>{{ destaque.ideia }}</strong></li>
+      }
+    </ul>
+  }
+
+  <app-ideia-lista
+    [ideias]="resultado()"
+    [idsProprios]="idsProprios()"
+    [idsVotados]="idsVotados()"
+    [carregando]="carregando()"
+    (votoSolicitado)="alternarVoto($event)"
+    (remocaoSolicitada)="excluir($event)"
+  />
+</main>
